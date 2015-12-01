@@ -93,6 +93,206 @@ static void Vertex(double th,double ph)
    glVertex3d(x,y,z);
 }
 
+//Draw a arch building
+static void draw_arch_building(double x,double y,double z,
+                 double dx,double dy,double dz,
+                 double th)
+{
+  glPushMatrix();
+  glTranslated(x,y+1.2,z+0.1);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,12*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glNormal3f( 0, 0, 1);
+  glVertex3f(-1,-1, 1);
+  glVertex3f(+1,-1, 1);
+  glVertex3f(+1,+1, 1);
+  glVertex3f(-1,+1, 1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+2.2,z+1.5);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glNormal3f( 0, 0, 1);
+  glVertex3f(-1,-1, 1);
+  glVertex3f(+1,-1, 1);
+  glVertex3f(+1,+1, 1);
+  glVertex3f(-1,+1, 1);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(x,y+9.2,z+1.4);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(+1,+1,+1);
+  glVertex3f(+1,+1,-1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+9.25,z-1.3);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(+1,+1,+1);
+  glVertex3f(+1,+1,-1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+11.2,z+1.7);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(+1,+1,+1);
+  glVertex3f(+1,+1,-1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+11.25,z-1.1);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(+1,+1,+1);
+  glVertex3f(+1,+1,-1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+11.25,z-2.6);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(+1,+1,+1);
+  glVertex3f(+1,+1,-1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(x+0.7,y+2.2,z+2.3);
+  glRotated(180,0,1,-100);
+  glScaled(2.5*dx,15*dy,2.5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x-2.2,y+2.2,z+2.3);
+  glRotated(180,0,1,-100);
+  glScaled(2.5*dx,15*dy,2.5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(x,y+2.3,z-5.85);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,15*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glNormal3f( 0, 0, 1);
+  glVertex3f(-1,-1, 1);
+  glVertex3f(+1,-1, 1);
+  glVertex3f(+1,+1, 1);
+  glVertex3f(-1,+1, 1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x,y+1.3,z-4.4);
+  glRotated(180,0,1,-100);
+  glScaled(5*dx,12*dy,5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glNormal3f( 0, 0, 1);
+  glVertex3f(-1,-1, 1);
+  glVertex3f(+1,-1, 1);
+  glVertex3f(+1,+1, 1);
+  glVertex3f(-1,+1, 1);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(x+0.7,y+2.3,z-3.6);
+  glRotated(180,0,1,-100);
+  glScaled(2.5*dx,15*dy,2.5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x-2.2,y+2.3,z-3.6);
+  glRotated(180,0,1,-100);
+  glScaled(2.5*dx,15*dy,2.5*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(x-1.5,y+5.75,z);
+  glRotated(180,0,1,-100);
+  glScaled(10*dx,3.5*dy,10*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslated(x-4.4,y+5.75,z);
+  glRotated(180,0,1,-100);
+  glScaled(10*dx,3.5*dy,10*dz);
+  glColor3f(0.560784,0.560784,0.737255);
+  glBegin(GL_QUADS);
+  glVertex3f(-1,-1,-1);
+  glVertex3f(-1,-1,+1);
+  glVertex3f(-1,+1,+1);
+  glVertex3f(-1,+1,-1);
+  glEnd();
+  glPopMatrix();
+
+
+}
+
+
 //Draw a street lamp
 static void draw_lamp(double x,double y,double z,
                  double dx,double dy,double dz,
@@ -135,8 +335,6 @@ static void draw_lamp(double x,double y,double z,
      glEnd();
    }
   glPopMatrix();
-
-
 }
 
 //Draw a streetlight
@@ -606,8 +804,10 @@ void display()
    draw_lamp(-6.5,1,-1.25, 0.3,0.3,0.3 , 90);
    draw_lamp(-6.5,1,3.5, 0.3,0.3,0.3 , 90);
 
-   //Draw SkyScraper
-   
+   //Draw Arch building
+  draw_arch_building(5,1,1.75, 0.3,0.3,0.3 , 90);
+  draw_arch_building(5,1,-4, 0.3,0.3,0.3 , 90);
+  draw_arch_building(5,10,-1.25, 0.3,0.3,0.3 , 90);
 
 
    //  Light switch
