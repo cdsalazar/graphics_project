@@ -1,0 +1,20 @@
+hw6: GameCubes with Lighting and Textures
+
+Cris Salazar
+CSCI4229/5229 Fall 2014
+
+
+
+Key bindings
+  ESC        Exit
+  0          Reset view angle to original position
+  PgDn/PgUp  Zoom in and out
+  arrows     Change view angle
+  x          Toggle axes
+  +/-        Changes field of view for perspective
+  [/]        Lower/Raise light source respectively
+  a/A        Toggle ambient light level
+  d/D        Toggle diffuse level
+  e/E        Toggle emission level
+  n/N        Toggle shininess level
+  p/P        Toggle GameCube motion
