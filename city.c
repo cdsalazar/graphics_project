@@ -52,7 +52,7 @@ int specular  =   0;  // Specular intensity (%)
 int shininess =   0;  // Shininess (power of two)
 float shinyvec[1];    // Shininess (value)
 int zh        =  90;  // Light azimuth
-float ylight  =   0;  // Elevation of light
+float ylight  =   20;  // Elevation of light
 unsigned int texture[7]; // Texture names
 
 float fpnx, fpny, fpnz;   // Camera position
@@ -93,6 +93,57 @@ static void Vertex(double th,double ph)
    glVertex3d(x,y,z);
 }
 
+//Draw a Skyscraper
+static void draw_skyscraper(double x,double y,double z,
+                 double dx,double dy,double dz,
+                 double th)
+{
+  glPushMatrix();
+  glTranslated(x,y+12.5,z);
+  glRotated(90,100,1,0);
+  glScaled(10*dx,10*dy,10*dz);
+  glColor3f(0.196078,0.6,0.8);
+  GLUquadric* qobj;
+  qobj = gluNewQuadric();
+  gluQuadricNormals(qobj, GLU_SMOOTH);
+  gluCylinder(qobj, 0.5, 1, 5, 20000, 16);
+  glPopMatrix();
+  glPushMatrix();
+  glColor3f( 0.6,0.196078,0.8);
+  glTranslated(x,y+12.5,z);
+  glRotated(90,100,1,0);
+  glScaled(4*dx,4*dy,4*dz);
+  glutSolidTorus(1.0, 2.0,100,100);
+  glPopMatrix();
+
+  glPushMatrix();
+  glColor3f( 0.6,0.196078,0.8);
+  glTranslated(x,y+14,z);
+  glRotated(90,100,1,0);
+  glScaled(3*dx,3*dy,3*dz);
+  glutSolidTorus(1.0, 2.0,100,100);
+  glPopMatrix();
+
+  glPushMatrix();
+  glColor3f( 0.6,0.196078,0.8);
+  glTranslated(x,y+15,z);
+  glRotated(90,100,1,0);
+  glScaled(2*dx,2*dy,2*dz);
+  glutSolidTorus(1.0, 2.0,100,100);
+  glPopMatrix();
+
+  glPushMatrix();
+  glColor3f( 0.6,0.196078,0.8);
+  glTranslated(x,y+15.75,z);
+  glRotated(90,100,1,0);
+  glScaled(dx,dy,dz);
+  glutSolidTorus(1.0, 2.0,100,100);
+  glPopMatrix();
+
+
+
+}
+
 //Draw a arch building
 static void draw_arch_building(double x,double y,double z,
                  double dx,double dy,double dz,
@@ -104,7 +155,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,12*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
-  glNormal3f( 0, 0, 1);
+  glNormal3f( 0, 0, -1);
   glVertex3f(-1,-1, 1);
   glVertex3f(+1,-1, 1);
   glVertex3f(+1,+1, 1);
@@ -131,6 +182,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 0,+1, 0);
   glVertex3f(-1,+1,+1);
   glVertex3f(+1,+1,+1);
   glVertex3f(+1,+1,-1);
@@ -143,6 +195,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 0,+1, 0);
   glVertex3f(-1,+1,+1);
   glVertex3f(+1,+1,+1);
   glVertex3f(+1,+1,-1);
@@ -156,6 +209,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 0,+1, 0);
   glVertex3f(-1,+1,+1);
   glVertex3f(+1,+1,+1);
   glVertex3f(+1,+1,-1);
@@ -168,6 +222,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 0,+1, 0);
   glVertex3f(-1,+1,+1);
   glVertex3f(+1,+1,+1);
   glVertex3f(+1,+1,-1);
@@ -180,6 +235,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 0,+1, 0);
   glVertex3f(-1,+1,+1);
   glVertex3f(+1,+1,+1);
   glVertex3f(+1,+1,-1);
@@ -193,6 +249,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(2.5*dx,15*dy,2.5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( -1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -205,6 +262,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(2.5*dx,15*dy,2.5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( +1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -218,7 +276,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(5*dx,15*dy,5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
-  glNormal3f( 0, 0, 1);
+  glNormal3f( 0, 0, -1);
   glVertex3f(-1,-1, 1);
   glVertex3f(+1,-1, 1);
   glVertex3f(+1,+1, 1);
@@ -245,6 +303,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(2.5*dx,15*dy,2.5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( -1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -257,6 +316,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(2.5*dx,15*dy,2.5*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -270,6 +330,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(10*dx,3.5*dy,10*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( -1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -282,6 +343,7 @@ static void draw_arch_building(double x,double y,double z,
   glScaled(10*dx,3.5*dy,10*dz);
   glColor3f(0.560784,0.560784,0.737255);
   glBegin(GL_QUADS);
+  glNormal3f( 1, 0, 0);
   glVertex3f(-1,-1,-1);
   glVertex3f(-1,-1,+1);
   glVertex3f(-1,+1,+1);
@@ -809,6 +871,9 @@ void display()
   draw_arch_building(5,1,-4, 0.3,0.3,0.3 , 90);
   draw_arch_building(5,10,-1.25, 0.3,0.3,0.3 , 90);
 
+  //Draw a Skyscraper
+  draw_skyscraper(-5.2,1,-5, 0.3,0.3,0.3 , 90);
+
 
    //  Light switch
    if (light)
@@ -818,7 +883,7 @@ void display()
         float Diffuse[]   = {0.01*diffuse ,0.01*diffuse ,0.01*diffuse ,1.0};
         float Specular[]  = {0.01*specular,0.01*specular,0.01*specular,1.0};
         //  Light position
-        float Position[]  = {distance*Cos(zh),ylight,distance*Sin(zh),1.0};
+        float Position[]  = {20*distance*Cos(zh),ylight,20*distance*Sin(zh),1.0};
         //  Draw light position as ball (still no lighting here)
         glColor3f(1,1,1);
         ball(Position[0],Position[1],Position[2] , 0.1);

@@ -1,20 +1,31 @@
-hw6: GameCubes with Lighting and Textures
+Future City
 
 Cris Salazar
 CSCI4229/5229 Fall 2014
 
+I did not get as much time as I thought I would to work on this assignment over
+Thanksgiving. As a result, the textures and lighting is still very lacking. I
+still need to apply textures to most of the scene, and I did not have a chance
+to create as many objects as I thought I would.
+
+The current light source is temporary to show that the surface normals are good.
+In the future, the lamps and stoplights will be the sources of light for the
+scene.
+Although, I think the main work the remains to be done is the texturing.
+
+To run:
+  $ make clean
+  $ make
+  $ ./city
 
 
 Key bindings
   ESC        Exit
-  0          Reset view angle to original position
   PgDn/PgUp  Zoom in and out
   arrows     Change view angle
-  x          Toggle axes
   +/-        Changes field of view for perspective
   [/]        Lower/Raise light source respectively
-  a/A        Toggle ambient light level
-  d/D        Toggle diffuse level
-  e/E        Toggle emission level
-  n/N        Toggle shininess level
-  p/P        Toggle GameCube motion
+  l/L        Toggle light source on/off
+
+  m/M        Toggle perspective
+  w/s/d/a    Navigation in first-person perspective
