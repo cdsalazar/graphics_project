@@ -1,22 +1,4 @@
-/*
- *  Projections
- *
- *  Draw 27 cubes to demonstrate orthogonal & prespective projections
- *
- *  Key bindings:
- *  m          Toggle between perspective and orthogonal
- *  p          Toggle movement on/off
- *  +/-        Changes field of view for perspective
- *  a          Toggle axes
- *  arrows     Change view angle
- *  PgDn/PgUp  Zoom in and out
- *  0          Reset view angle
- *  ESC        Exit
- */
- #include <stdio.h>
- #include <stdlib.h>
- #include <stdarg.h>
- #include <math.h>
+
  #include "CSCIx229.h"
  //  OpenGL with prototypes for glext
  #define GL_GLEXT_PROTOTYPES
@@ -91,6 +73,37 @@ static void Vertex(double th,double ph)
    //  and normal vectors are the same
    glNormal3d(x,y,z);
    glVertex3d(x,y,z);
+}
+
+
+static void ball(double x,double y,double z,double r)
+{
+   int th,ph;
+   float yellow[] = {1.0,1.0,0.0,1.0};
+   float Emission[]  = {0.0,0.0,0.01*emission,1.0};
+   //  Save transformation
+   glPushMatrix();
+   //  Offset, scale and rotate
+   glTranslated(x,y,z);
+   glScaled(r,r,r);
+   //  White ball
+   glColor3f(1,1,1);
+   glMaterialfv(GL_FRONT,GL_SHININESS,shinyvec);
+   glMaterialfv(GL_FRONT,GL_SPECULAR,yellow);
+   glMaterialfv(GL_FRONT,GL_EMISSION,Emission);
+   //  Bands of latitude
+   for (ph=-90;ph<90;ph+=inc)
+   {
+      glBegin(GL_QUAD_STRIP);
+      for (th=0;th<=360;th+=2*inc)
+      {
+         Vertex(th,ph);
+         Vertex(th,ph+inc);
+      }
+      glEnd();
+   }
+   //  Undo transofrmations
+   glPopMatrix();
 }
 
 //Draw a Skyscraper
@@ -386,6 +399,9 @@ static void draw_lamp(double x,double y,double z,
   glTranslated(x,y,z);
   glRotated(90,100,1,0);
   glScaled(0.2*dx,0.2*dy,0.2*dz);
+
+  //  White ball
+  glColor3f(1,1,1);
   for (ph1=-90;ph1<90;ph1+=inc)
   {
      glBegin(GL_QUAD_STRIP);
@@ -607,29 +623,47 @@ static void city_frame(double x,double y,double z,
                  double th)
 {
   //  Draw disc
-  int i;
+  int i,k;
+  glEnable(GL_TEXTURE_2D);
   glPushMatrix();
 
-  glTranslated(x,y-2.4,z);
+  glTranslated(x,y-2.6,z);
   glRotated(th,100,1,0);
-  glScaled(10*dx,10*dy,10*dz);
+  glScaled(125*dx,125*dy,dz);
 
   glLineWidth(100);
-  glColor3f(0.137255,0.556863,0.137255);
-  if (ntex) glBindTexture(GL_TEXTURE_2D,texture[1]);
-  glBegin(GL_TRIANGLE_FAN);
-  for(i =0; i <= 360; i++){
-    int t = i % 2;
-    double angle = 2* 3.14159 * i / 360;
-    double x = cos(angle)*15;
-    double y = sin(angle)*15;
-    glNormal3f( x, y, 1);
-    glTexCoord2f(t,t); glVertex2d(x,y);
+  // glColor3f(0.137255,0.556863,0.137255);
+
+  glColor3f(1,1,1);
+
+  for (i=1;i>=-1;i-=2)
+  {
+     glBindTexture(GL_TEXTURE_2D, texture[1]);
+     glNormal3f(0,0,i);
+     glBegin(GL_TRIANGLE_FAN);
+     glTexCoord2f(0.5,0.5);
+     glVertex3f(0,0,i);
+     for (k=0;k<=360;k+=10)
+     {
+        glTexCoord2f(0.5*Cos(k)+0.5,0.5*Sin(k)+0.5);
+        glVertex3f(i*Cos(k),Sin(k),i);
+     }
+     glEnd();
   }
-  glDisable(GL_TEXTURE_2D);
+  //  Edge
+  glBindTexture(GL_TEXTURE_2D,texture[1]);
+  glColor3f(1.00,0.77,0.36);
+  glBegin(GL_QUAD_STRIP);
+  for (k=0;k<=360;k+=10)
+  {
+     glNormal3f(Cos(k),Sin(k),0);
+     glTexCoord2f(0,0.5*k); glVertex3f(Cos(k),Sin(k),+1);
+     glTexCoord2f(1,0.5*k); glVertex3f(Cos(k),Sin(k),-1);
+  }
+
   glEnd();
   glPopMatrix();
-
+  glDisable(GL_TEXTURE_2D);
 
 }
 
@@ -658,7 +692,8 @@ static void draw_ground(double x,double y,double z,
 
     glEnable(GL_TEXTURE_2D);
     glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,mode?GL_REPLACE:GL_MODULATE);
-    glColor3f(0.137255,0.556863,0.137255);
+    // glColor3f(0.137255,0.556863,0.137255);
+    glColor3f(1,1,1);
     if (ntex) glBindTexture(GL_TEXTURE_2D,texture[0]);
     glBegin(GL_POLYGON);
     glNormal3f( 0,+1, 0);
@@ -680,7 +715,8 @@ static void draw_ground(double x,double y,double z,
 
      glEnable(GL_TEXTURE_2D);
      glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,mode?GL_REPLACE:GL_MODULATE);
-     glColor3f(0.137255,0.556863,0.137255);
+    //  glColor3f(0.137255,0.556863,0.137255);
+     glColor3f(1,1,1);
      if (ntex) glBindTexture(GL_TEXTURE_2D,texture[0]);
      glBegin(GL_POLYGON);
      glNormal3f( 0,+1, 0);
@@ -701,7 +737,8 @@ static void draw_ground(double x,double y,double z,
 
       glEnable(GL_TEXTURE_2D);
       glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,mode?GL_REPLACE:GL_MODULATE);
-      glColor3f(0.137255,0.556863,0.137255);
+      // glColor3f(0.137255,0.556863,0.137255);
+      glColor3f(1,1,1);
       if (ntex) glBindTexture(GL_TEXTURE_2D,texture[0]);
       glBegin(GL_POLYGON);
       glNormal3f( 0,+1, 0);
@@ -722,7 +759,8 @@ static void draw_ground(double x,double y,double z,
 
        glEnable(GL_TEXTURE_2D);
        glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,mode?GL_REPLACE:GL_MODULATE);
-       glColor3f(0.137255,0.556863,0.137255);
+      //  glColor3f(0.137255,0.556863,0.137255);
+       glColor3f(1,1,1);
        if (ntex) glBindTexture(GL_TEXTURE_2D,texture[0]);
        glBegin(GL_POLYGON);
        glNormal3f( 0,+1, 0);
@@ -738,36 +776,6 @@ static void draw_ground(double x,double y,double z,
 
 }
 
-
-static void ball(double x,double y,double z,double r)
-{
-   int th,ph;
-   float yellow[] = {1.0,1.0,0.0,1.0};
-   float Emission[]  = {0.0,0.0,0.01*emission,1.0};
-   //  Save transformation
-   glPushMatrix();
-   //  Offset, scale and rotate
-   glTranslated(x,y,z);
-   glScaled(r,r,r);
-   //  White ball
-   glColor3f(1,1,1);
-   glMaterialfv(GL_FRONT,GL_SHININESS,shinyvec);
-   glMaterialfv(GL_FRONT,GL_SPECULAR,yellow);
-   glMaterialfv(GL_FRONT,GL_EMISSION,Emission);
-   //  Bands of latitude
-   for (ph=-90;ph<90;ph+=inc)
-   {
-      glBegin(GL_QUAD_STRIP);
-      for (th=0;th<=360;th+=2*inc)
-      {
-         Vertex(th,ph);
-         Vertex(th,ph+inc);
-      }
-      glEnd();
-   }
-   //  Undo transofrmations
-   glPopMatrix();
-}
 
 /*
  *  OpenGL (GLUT) calls this routine to display the scene
@@ -1104,7 +1112,7 @@ int main(int argc,char* argv[])
    glutIdleFunc(idle_function);
    //  Load textures
    texture[0] = LoadTexBMP("textures/central_block.bmp");
-   texture[1] = LoadTexBMP("textures/outide_grass.bmp");
+   texture[1] = LoadTexBMP("textures/grass.bmp");
    //  Set callbacks
    glutDisplayFunc(display);
    glutReshapeFunc(reshape);
